@@ -101,13 +101,15 @@ fetchUsers(){
         return this.state.dataSource.map(function(element){
           // console.log(element);
           return (
-            <View>
+            <View key={element.id}>
               <DataList 
               key= {element.id}
               state={element.state} 
               recovered={element.recovered} 
               deceased={element.deaths} 
               total= {element.confirmed+element.recovered+element.deaths+element.active}
+              recoveredChanges = {element.rChanges}
+              deceasedChanges = {element.dChanges}
               heading={false}
               />
             </View>
@@ -142,7 +144,6 @@ fetchUsers(){
     // console.log("erer", this.state.currentRecovered)
     // console.log("erer", JSON.stringify(dataCovid) )
     const upArrow = "↑"
-    const downArrow = "↓"
     if(this.state.currentActive == 0){
       this.calculateCount();
     }
@@ -180,6 +181,7 @@ fetchUsers(){
             
             
           </View>
+          <Text style={{fontSize : 12}}>*Changes in future Updates</Text>
       {/* </ScrollView> */}
         </View>
     );

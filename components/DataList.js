@@ -13,8 +13,9 @@ export default class DataList extends React.Component{
     }
  }
   render() {
-      const {state, total, recovered, deceased, heading, key} = this.props;
+      const {state, total, recovered, deceased, heading, key, recoveredChanges, deceasedChanges} = this.props;
       const testStyle = (heading)? styles.testHeadingStyle : styles.dataStyle
+      const upArrow = '↑'
     return (
         <View style={styles.container}>
             <View style={styles.stateBoxState}>
@@ -24,10 +25,10 @@ export default class DataList extends React.Component{
                 <Text style={testStyle}>{total}</Text>
             </View>
             <View style={styles.stateBox}>
-                <Text style={testStyle}>{recovered}</Text>
+                <Text style={testStyle}>{recovered}{(recoveredChanges>0)?<Text>[{recoveredChanges}{upArrow}]</Text>:null}</Text>
             </View>
             <View style={styles.stateBox}>
-                <Text style={testStyle}>{deceased}</Text>
+                <Text style={testStyle}>{deceased}{(deceasedChanges>0)?<Text>[{deceasedChanges}{upArrow}]</Text>:null}</Text>
             </View>
         </View>
     );
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     textShadowRadius: 10,
   },
   dataStyle:{
-    fontSize : 15,
+    fontSize : 13,
     fontWeight : '700',
     color : '#6c757d',
     // textShadowColor: 'rgba(0, 0, 0, 0.50)',
